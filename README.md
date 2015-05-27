@@ -1,2 +1,2 @@
 # mobpage
-test
+Page Object DSL for iOS and Android mobile testing
