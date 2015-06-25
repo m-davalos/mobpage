@@ -13,6 +13,12 @@ module PageObject
             return element if element.text == identifier[:text]
             nil
           end
+        elsif identifier.has_key?(:name)  && identifier.has_key(:class)
+          elements = @driver.find_elements(class: identifier[:class])
+          elements.each do |element|
+            return element if element.attribute('name') == identifier[:name]
+            nil
+          end
         else
           @driver.find_element(identifier)
         end
