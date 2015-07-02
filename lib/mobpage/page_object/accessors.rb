@@ -5,8 +5,7 @@ module PageObject
         if identifier.has_key?(:index)
           index = identifier[:index].to_i
           identifier.delete(:index)
-          element = @driver.find_elements(identifier)[index]
-          element
+          @driver.find_elements(identifier)[index]
         elsif identifier.has_key?(:text)
           elements = @driver.find_elements(identifier)
           elements.each do |element|
@@ -16,7 +15,7 @@ module PageObject
         elsif identifier.has_key?(:name)  && identifier.has_key?(:class)
           elements = @driver.find_elements(class: identifier[:class])
           elements.each do |element|
-            return element if element.attribute('name') == identifier[:name]
+            return element if element.attribute('name').strip == identifier[:name].strip
             nil
           end
         else
