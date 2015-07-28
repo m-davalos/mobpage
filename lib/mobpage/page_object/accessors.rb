@@ -3,22 +3,27 @@ module PageObject
     def create_standard_methods(name, identifier={}, &block)
       define_method("#{name}_element") do
         if identifier.has_key?(:index)
+          puts 'in index'
           index = identifier[:index].to_i
           identifier.delete(:index)
           @driver.find_elements(identifier)[index]
         elsif identifier.has_key?(:text)
+          puts 'in text'
           elements = @driver.find_elements(identifier)
           elements.each do |element|
             return element if element.text == identifier[:text]
             nil
           end
         elsif identifier.has_key?(:name)  && identifier.has_key?(:class)
+          puts 'in name & class ' + identifier.to_s
           elements = @driver.find_elements(class: identifier[:class])
           elements.each do |element|
+            puts "Element #{element.attribute('name')}"
             return element if element.attribute('name').strip == identifier[:name].strip
             nil
           end
         else
+          puts 'in else'
           @driver.find_element(identifier)
         end
       end
@@ -92,7 +97,7 @@ module PageObject
     end
 
     def item_lists(name, identifier={}, &block)
-      create_standard_methods_for_collections(name, identifier)
+      create_standard_methods_for_collection(name, identifier)
     end
 
     def element(name, identifier={}, &block)
