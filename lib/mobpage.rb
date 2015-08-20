@@ -19,6 +19,7 @@ module PageObject
     alias_method :dialog, :single
     alias_method :spinner, :single
     alias_method :view_switcher, :single
+    alias_method :picker, :single
 
     alias_method :buttons, :collection
     alias_method :switches, :collection
@@ -36,5 +37,6 @@ module PageObject
     alias_method :dialogs, :collection
     alias_method :spinners, :collection
     alias_method :view_switchers, :collection
+    alias_method :picker, :collection
   end
 end
